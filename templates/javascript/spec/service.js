@@ -9,13 +9,17 @@ describe('Service: <%= cameledName %>', function () {
     //add your mocks here
   });
 
-  // instantiate service
   var <%= cameledName %>;
-  beforeEach(inject(function (_<%= cameledName %>_) {
-    <%= cameledName %> = _<%= cameledName %>_;
-  }));
+
+  // instantiate service
+  function aService() {
+    inject(function (_<%= cameledName %>_) {
+      <%= cameledName %> = _<%= cameledName %>_;
+    });
+  }
 
   it('should do something', function () {
+    aService();
     expect(<%= cameledName %>.someMethod()).toBe(42);
   });
 

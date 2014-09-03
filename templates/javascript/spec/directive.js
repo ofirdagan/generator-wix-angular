@@ -12,13 +12,16 @@ describe('Directive: <%= cameledName %>', function () {
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope) {
-    scope = $rootScope.$new();
-  }));
+  function compile(template) {
+    inject(function ($rootScope, $compile) {
+      scope = $rootScope.$new();
+      element = angular.element(template);
+      element = $compile(element)(scope);
+    });
+  }
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<<%= _.dasherize(name) %>></<%= _.dasherize(name) %>>');
-    element = $compile(element)(scope);
+  it('should make hidden element visible', inject(function () {
+    compile('<<%= _.dasherize(name) %>></<%= _.dasherize(name) %>>');
     expect(element.text()).toBe('this is the <%= cameledName %> directive');
   }));
 });
